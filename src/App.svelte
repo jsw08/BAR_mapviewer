@@ -4,16 +4,29 @@
 
 	let maps = {};
 	let keys = [];
+	let loading = true;
+	let currentIndex = 0;
+
+	//@ts-expect-error
+	Array.prototype.shuffle = function() {
+		for (let i = this.length - 1; i > 0; i--) {
+			const j = Math.floor(Math.random() * (i + 1));
+			const temp = this[i];
+			this[i] = this[j];
+			this[j] = temp;
+		}
+	}
 	
-	onMount(_ => {
-		fetch("https://raw.githubusercontent.com/beyond-all-reason/maps-metadata/main/map_list.yaml")
-			.then(v => v.text())
-			.then(v => parse(v))
-			.then(v => {
-				maps = v;
-				keys = Object.keys(v)
-			})
-	})
+	onMount(_ => fetch("https://raw.githubusercontent.com/beyond-all-reason/maps-metadata/main/map_list.yaml")
+		.then(v => v.text())
+		.then(v => parse(v))
+		.then(v => {
+			maps = v;
+			keys = Object.keys(v)
+			// @ts-expect-error5
+			keys.shuffle();
+			loading = false;
+		}))
 </script>
 
 <h1>Bar mapviewer</h1>
