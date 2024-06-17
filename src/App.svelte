@@ -21,8 +21,9 @@
 
 {#each keys as map} 
 	{@const img = maps[map].photo[0].downloadURL}
+	{@const title = maps[map].displayName}
 	<a href={img}>
-		<img src={img} alt={maps[map].displayName} style="max-width: 100svw; max-height: 70svh;"/>
+		<img src={img} alt={title} {title} style="max-width: 100svw; max-height: 70svh;"/>
 	</a>
 	<br>
 {/each}
