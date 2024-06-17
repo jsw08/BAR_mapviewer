@@ -16,10 +16,13 @@
 	})
 </script>
 
+<h1>Bar mapviewer</h1>
+<p>Hover your mouse over the images to see the title. Click an image to open it.</p>
+
 {#each keys as map} 
 	{@const img = maps[map].photo[0].downloadURL}
 	<a href={img}>
-		<img src={img} alt="img" style="max-width: auto; max-height: 70svh;"/>
+		<img src={img} alt={maps[map].displayName} style="max-width: 100svw; max-height: 70svh;"/>
 	</a>
 	<br>
 {/each}
