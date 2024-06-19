@@ -16,8 +16,16 @@
 			this[j] = temp;
 		}
 	}
+
+	async function fetchMaps() {
+		let req = await fetch("https://raw.githubusercontent.com/beyond-all-reason/maps-metadata/main/map_list.yaml");
+		let maps = parse(await req.text())
+		let mapIDS = Object.keys(maps)
+		mapIDS = mapIDS.shuffle();
+
+	}
 	
-	onMount(_ => fetch("https://raw.githubusercontent.com/beyond-all-reason/maps-metadata/main/map_list.yaml")
+	onMount(_ => 
 		.then(v => v.text())
 		.then(v => parse(v))
 		.then(v => {
