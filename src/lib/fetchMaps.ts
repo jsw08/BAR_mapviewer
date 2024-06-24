@@ -19,7 +19,8 @@ export type BARMap = {
     id: string;
     name: string;
     author: string;
-    pictures: string[];
+    picture: string; // TODO: Support for multiple pictures (even though I haven't found a map that uses this.)
+
 }
 type UnparsedBARMap = {
     displayName: string;
@@ -44,12 +45,12 @@ const fetchMaps = async (): Promise<BARMap[]> => {
             id: i,
             name: map.displayName,
             author: map.author,
-            pictures: map.photo.map(v => v.downloadURL) 
+            picture: map.photo[0].downloadURL
         }
         parsedMaps.push(parsedMap)
     }
 
-    return parsedMaps
+    return parsedMaps.shuffle()
 }
 
 export default fetchMaps
