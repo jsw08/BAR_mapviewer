@@ -12,7 +12,8 @@
 
 	maps.then((v) => (loadedMaps = v));
 	$: preloadMaps = loadedMaps.filter(
-		(_, index) => index < currentIndex + 5 && index <= loadedMaps.length,
+		(_, index) => (index <= currentIndex + 5 && index <= loadedMaps.length) 
+			|| index >= currentIndex - 2
 	);
 
 	const nextImage = (): void => {
@@ -21,7 +22,7 @@
 			: (currentIndex += 1);
 	};
 	const prevImage = (): void => {
-		currentIndex > 0
+		currentIndex <= 0
 			? (currentIndex = loadedMaps.length - 1)
 			: (currentIndex -= 1);
 	};
