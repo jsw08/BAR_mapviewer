@@ -5,8 +5,11 @@ export default {
     "./src/*.svelte"
   ],
   theme: {
-    extend: {},
+    extend: {
+    },
   },
-  plugins: [],
+  plugins: [
+    import("daisyui")
+  ],
 }
 
