@@ -63,7 +63,15 @@
 		</div>
 	</dialog>
 {:then maps}
-	<main class="w-full h-full bg-center bg-no-repeat bg-contain" style:background-image={`url(${maps[currentIndex].picture})`}>
-
+	<main class="w-full h-full bg-center bg-no-repeat bg-contain flex flex-row justify-start items-end p-2" style:background-image={`url(${maps[currentIndex].picture})`}>
+		<div class="card bg-primary text-primary-content w-96">
+			<div class="card-body">
+			  <h2 class="card-title">Card title!</h2>
+			  <p>If a dog chews shoes whose shoes does he choose?</p>
+			  <div class="card-actions justify-end">
+				<button class="btn">Buy Now</button>
+			  </div>
+			</div>
+		  </div> 
 	</main>
 {/await}
