@@ -22,8 +22,8 @@
 	};
 	const prevImage = (): void => {
 		currentIndex > 0
-			? (currentIndex = loadedMaps.length - 1)
-			: (currentIndex -= 1);
+			? (currentIndex -= 1)
+			: (currentIndex = loadedMaps.length - 1)
 	};
 	const keyHandler: KeyboardEventHandler<Window> = (e): void => {
 		if (!loadedMaps.length) return;
@@ -53,41 +53,17 @@
 </svelte:head>
 
 {#await maps}
-	<h1>Loading...</h1>
-{:then maps}
-	<main style:background-image={`url(${maps[currentIndex].picture})`}>
-		<button on:click={prevImage}>Prev</button>
-		<div>
-			<p>{maps[currentIndex].name}</p>
+	<dialog class="modal modal-bottom sm:modal-middle" open>
+		<div class="modal-box bg-base-200">
+			<h3 class="text-lg font-bold">Loading!</h3>
+			<p class="py-4">We're fetching and parsing the newest maps from the <a href="https://raw.githubusercontent.com/beyond-all-reason/maps-metadata/main/map_list.yaml">BAR metadata repo</a>.</p>
+			<div class="modal-action">
+				<span class="loading loading-ring loading-lg"></span>
+			</div>
 		</div>
-		<button on:click={nextImage}> Next</button>
+	</dialog>
+{:then maps}
+	<main class="w-full h-full bg-center bg-no-repeat bg-contain" style:background-image={`url(${maps[currentIndex].picture})`}>
+
 	</main>
 {/await}
-
-<style>
-	main {
-		width: 100%;
-		height: 100%;
-		display: flex;
-		flex-direction: row;
-		justify-content: space-between;
-		place-items: center;
-		background-position: center;
-		background-repeat: no-repeat;
-		background-size: contain;
-	}
-	main > div {
-		height: 100%;
-		display: flex;
-		flex-direction: column;
-		justify-content: end;
-		flex-grow: 3;
-		place-items: center center;
-		gap: 5px;
-	}
-
-	main > div > p {
-		background-color: white;
-		padding: 2px;
-	}
-</style>
